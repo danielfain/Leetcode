@@ -16,6 +16,6 @@ class Solution:
             v += values[numeral]
         return v
 
-numeral = 'XXX' # The roman numeral to be solved
+numeral = 'XXIII' # The roman numeral to be solved
 
 print(Solution.romanToInt(Solution(), numeral))
