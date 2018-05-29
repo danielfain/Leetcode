@@ -1,2 +1,2 @@
 # leetcode
-leetcode and hackerrank problems
+my leetcode solutions
