@@ -1,10 +1,11 @@
+#include <iostream>
 #include <vector>
 
 using namespace std;
 
 vector<int> smallestWindowToBeSorted(vector<int>& nums) {
 
-    vector<int> bounds {};
+    vector<int> bounds;
 
     int right = INT32_MAX;
     int left = INT32_MIN;
@@ -26,4 +27,12 @@ vector<int> smallestWindowToBeSorted(vector<int>& nums) {
     }
 
     return bounds;
+}
+
+int main() {
+    vector<int> nums {1, 2, 5, 4, 3, 1, 9, 6, 12};
+
+    vector<int> res = smallestWindowToBeSorted(nums);
+
+    cout << res[0] << ", " << res[1] << endl;
 }
