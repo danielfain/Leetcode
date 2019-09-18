@@ -1,2 +1,2 @@
-# leetcode
-my leetcode solutions
+# interview-prep
+algorithm and data structure interview prep
