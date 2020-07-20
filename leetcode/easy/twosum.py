@@ -5,15 +5,12 @@ def twoSum(nums, target):
     :rtype: List[int]
     """
     hm = {}
+        
     for i in range(len(nums)):
-        dif = target - nums[i]
-        if dif in hm:
-            return sorted([hm[dif], i])
+        if target - nums[i] in hm:
+            return sorted([i, hm[target - nums[i]]])
         else:
             hm[nums[i]] = i
-
-
-
 
 
 nums = [2, 2, 11, 15, 18]
