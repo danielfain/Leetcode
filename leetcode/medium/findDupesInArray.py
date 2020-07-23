@@ -1,12 +1,13 @@
 def findDuplicates(nums):
-    hm = {}
     dupes = []
-    
-    for i in range(len(nums)):
-        if nums[i] in hm:
-            dupes.append(nums[i])
+        
+    for num in nums:
+        i = abs(num) - 1
+        
+        if nums[i] < 0:
+            dupes.append(abs(num))
         else:
-            hm[nums[i]] = True
+            nums[i] = nums[i] * -1
         
     return dupes
 
