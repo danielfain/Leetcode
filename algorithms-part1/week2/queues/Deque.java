@@ -1,4 +1,5 @@
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class Deque<Item> implements Iterable<Item> {
 
@@ -15,11 +16,31 @@ public class Deque<Item> implements Iterable<Item> {
     public static void main(String[] args) {
         Deque<Integer> d = new Deque<>();
         d.addFirst(5);
+        d.addLast(10);
+
+        for (Integer i : d) {
+            System.out.println(i);
+        }
     }
 
     @Override
     public Iterator<Item> iterator() {
-        return null;
+        return new Iterator<Item>() {
+            @Override
+            public boolean hasNext() {
+                return !isEmpty();
+            }
+
+            @Override
+            public Item next() {
+                return removeFirst();
+            }
+
+            @Override
+            public void remove() {
+                throw new UnsupportedOperationException();
+            }
+        };
     }
 
     // construct an empty deque
@@ -45,6 +66,7 @@ public class Deque<Item> implements Iterable<Item> {
         if (count == 0) {
             Node<Item> newNode = new Node<>();
             newNode.item = item;
+            newNode.next = last;
             newNode.prev = first;
             first.next = newNode;
             last.prev = newNode;
@@ -65,7 +87,11 @@ public class Deque<Item> implements Iterable<Item> {
 
         if (count == 0) {
             Node<Item> newNode = new Node<>();
-
+            newNode.item = item;
+            newNode.next = last;
+            newNode.prev = first;
+            last.prev = newNode;
+            first.next = newNode;
         } else {
             Node<Item> oldNode = last.prev;
             Node<Item> newNode = new Node<>();
@@ -79,16 +105,27 @@ public class Deque<Item> implements Iterable<Item> {
 
     // remove and return the item from the front
     public Item removeFirst() {
+        if (isEmpty()) throw new NoSuchElementException();
+
         Node<Item> oldNode = first.next;
-        first.next = oldNode.next;
+        Node<Item> newNode = oldNode.next;
+        newNode.prev = first;
+        first.next = newNode;
+
+        count -= 1;
         return oldNode.item;
     }
 
     // remove and return the item from the back
     public Item removeLast() {
-        Node<Item> oldNode = last.next;
+        if (isEmpty()) throw new NoSuchElementException();
 
+        Node<Item> oldNode = last.prev;
+        Node<Item> newNode = oldNode.prev;
+        newNode.next = last;
+        last.prev = newNode;
 
+        count -= 1;
         return oldNode.item;
     }
 
