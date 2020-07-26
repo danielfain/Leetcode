@@ -17,7 +17,16 @@ public class Deque<Item> implements Iterable<Item> {
         Deque<Integer> d = new Deque<>();
         d.addFirst(5);
         d.addLast(10);
+        d.addFirst(15);
+        d.addLast(9);
+        d.addFirst(3);
 
+        d.removeFirst();
+        d.removeLast();
+
+        System.out.println("SIZE: " + d.size());
+
+        System.out.println("---LIST---");
         for (Integer i : d) {
             System.out.println(i);
         }
@@ -33,6 +42,7 @@ public class Deque<Item> implements Iterable<Item> {
 
             @Override
             public Item next() {
+                if (isEmpty()) throw new NoSuchElementException();
                 return removeFirst();
             }
 
@@ -97,6 +107,7 @@ public class Deque<Item> implements Iterable<Item> {
             Node<Item> newNode = new Node<>();
             newNode.item = item;
             newNode.prev = oldNode;
+            newNode.next = last;
             oldNode.next = newNode;
             last.prev = newNode;
         }
